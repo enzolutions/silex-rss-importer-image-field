@@ -4,6 +4,6 @@
         "desarrolla2/rss-client":  "dev-master"
     },
     "autoload": {
-      "psr-4": {"SieteSabores\\Timeline": "src/"}
+      "psr-0": {"SieteSabores\\Timeline": "src/"}
     }
 }

@@ -1,6 +1,10 @@
 <?php
 namespace SieteSabores\Timeline;
 
+use Desarrolla2\RSSClient\Factory\AbstractNodeFactory;
+use Desarrolla2\RSSClient\Parser\Processor\ProcessorInterface;
+use Desarrolla2\RSSClient\Node\NodeInterface;
+
 class TimelinesRSSProcessor extends AbstractNodeFactory implements ProcessorInterface
 {
     /**

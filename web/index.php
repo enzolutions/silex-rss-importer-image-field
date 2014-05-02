@@ -3,9 +3,6 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Desarrolla2\RSSClient\RSSClient;
-use Desarrolla2\RSSClient\Parser\Processor\ProcessorInterface;
-use Desarrolla2\RSSClient\Factory\AbstractNodeFactory;
-use Desarrolla2\RSSClient\Node\NodeInterface;
 use SieteSabores\Timeline\TimelinesRSSProcessor;
 
 $app = new Silex\Application();
