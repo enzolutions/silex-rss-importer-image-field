@@ -1,0 +1,9 @@
+{
+    "require": {
+        "silex/silex": "~1.2",
+        "desarrolla2/rss-client":  "dev-master"
+    },
+    "autoload": {
+      "psr-4": {"SieteSabores\\Timeline": "src/"}
+    }
+}
