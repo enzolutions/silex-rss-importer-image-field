@@ -4,11 +4,16 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Desarrolla2\RSSClient\RSSClient;
 use SieteSabores\Timeline\TimelinesRSSProcessor;
+use SieteSabores\Timeline\FeedParserCustom;
 
 $app = new Silex\Application();
 
 $app->get('/rss/import', function() use ($app) {
   $client = new RSSClient();
+
+  // Custom parser to replace of preprocessor and extend method
+  //$parser = new FeedParserCustom();
+  //$client->setParser($parser);
 
   $client->pushProcessor( new TimelinesRSSProcessor($client->getSanitizer()));
 
