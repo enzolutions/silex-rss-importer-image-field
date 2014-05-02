@@ -3,9 +3,9 @@ time-closeup-silex
 
 Custom RSS Reader + REST Services build with Silex micro-framework
 
-= Install
+## Install
 
-== Composer
+### Composer
 
 Execute inside the clone folder the command
 
