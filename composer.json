@@ -1,7 +1,9 @@
 {
     "require": {
         "silex/silex": "~1.2",
-        "desarrolla2/rss-client":  "dev-master"
+        "desarrolla2/rss-client":  "dev-master",
+        "deralex/yaml-config-service-provider": "1.0.*@dev",
+        "doctrine/dbal": "2.2.*"
     },
     "autoload": {
       "psr-0": {"SieteSabores\\Timeline": "src/"}

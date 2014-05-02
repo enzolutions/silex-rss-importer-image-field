@@ -2,11 +2,38 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+// Parser libreries
 use Desarrolla2\RSSClient\RSSClient;
 use SieteSabores\Timeline\TimelinesRSSProcessor;
 use SieteSabores\Timeline\FeedParserCustom;
 
+// DB Libraries
+use Doctrine\DBAL\Schema\Table;
+
 $app = new Silex\Application();
+
+// Load App YML configuration
+$app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__.'/../config/settings.yml'));
+
+// Set DB Connection
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => $app['config']['database']
+));
+
+$schema = $app['db']->getSchemaManager();
+// Verify DB Table time_covers
+if (!$schema->tablesExist('time_covers')) {
+
+  $time_covers = new Table('time_covers');
+  $time_covers->addColumn('id', 'integer', array('unsigned' => true, 'autoincrement' => true));
+  $time_covers->setPrimaryKey(array('id'));
+  $time_covers->addColumn('title', 'string', array('length' => 128));
+  $time_covers->addColumn('link', 'string', array('length' => 255));
+  $time_covers->addColumn('thumb', 'string', array('length' => 255));
+  $time_covers->addColumn('created', 'datetime');
+
+  $schema->createTable($time_covers);
+}
 
 $app->get('/rss/import', function() use ($app) {
   $client = new RSSClient();
@@ -32,26 +59,39 @@ $app->get('/rss/import', function() use ($app) {
 
   $feeds = $client->fetch('time_covers');
 
-  foreach ($feeds as $feed) {
-    print "<pre>";
-    //print_r($feed)
-    print_r($feed->getTitle());
-    print "<br/>";
-    print_r($feed->getLink());
-    print "<br/>";
-    print_r($feed->getPubDate());
-    print "<br/>";
-    // Used with or without custom parser
-    print_r($feed->getExtended('thumb_image'));
-    print "<br/>";
+  // Determine the last cover inserted
+  $sql = "select created from time_covers order by created desc limit 1";
+  $last_cover = $app['db']->fetchAssoc($sql);
 
-    // Used only with custom parser
-    //print_r($feed->getThumb_image());
-
-    print "</pre>";
+  if(!empty($last_cover)) {
+    $last_cover_date = new DateTime($last_cover['created']);
+  }
+  else {
+    // Set a old date to import all covers available
+    $last_cover_date = new DateTime('1 January 1970 00:00:00');
   }
 
-  return $app->escape('hello');
+  $feeds_imported = 0;
+
+  foreach ($feeds as $feed) {
+    if($feed->getPubDate()->getTimestamp() > $last_cover_date->getTimestamp() ) {
+      $feeds_imported++;
+      // Used $feed->getThumb_image(); only with custom parser
+
+      $app['db']->insert('time_covers', array(
+        'title' => $feed->getTitle(),
+        'link' => $feed->getLink(),
+        'thumb' => $feed->getExtended('thumb_image'),
+        'created' => $feed->getPubDate()->format('Y-m-d H:i:s')
+      ));
+    }
+  }
+
+  if($feeds_imported) {
+    return $app->escape($feeds_imported . ' were imported!');
+  } else {
+    return $app->escape('No new items were imported');
+  }
 });
 
 $app['debug'] = true;
