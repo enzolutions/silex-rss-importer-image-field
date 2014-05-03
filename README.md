@@ -38,6 +38,22 @@ For information about how to install composer go to <a href="https://github.com/
 
 ## Install
 
+Use the file in config/setting.yml.dist to create your own version of setting and name the file settings.yml.
+
+Check the settings sample file
+````
+database:
+    driver: pdo_mysql
+    host: localhost
+    dbname: time_closeup
+    user: root
+    password: root
+    charset: utf8
+rss:
+    url: 'http://lightbox.time.com/category/closeup/feed/'
+
+````
+
 <ol>
   <li>Created a DB and put credentials in config/settings.yml</li>
   <li>Configure your webservices to point to web folder as document root</li>

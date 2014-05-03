@@ -49,10 +49,9 @@ $app->get('/rss/import', function() use ($app) {
   // Custom pushProcessor to force add thumb image
   $client->pushProcessor( new TimelinesRSSProcessor($client->getSanitizer()));
 
-
   $client->addFeeds(
       array(
-          'http://lightbox.time.com/category/closeup/feed/',
+          $app['config']['rss']['url'],
       ),
       'time_covers'
   );

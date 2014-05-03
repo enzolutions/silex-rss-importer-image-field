@@ -5,3 +5,5 @@ database:
     user: root
     password: root
     charset: utf8
+rss:
+    url: 'http://lightbox.time.com/category/closeup/feed/'
