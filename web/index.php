@@ -94,6 +94,25 @@ $app->get('/rss/import', function() use ($app) {
   }
 });
 
-$app['debug'] = true;
+$app->get('/rest/covers/{start_date}/{stop_date}', function ($start_date, $stop_date) use ($app) {
+
+    $sql = "select title, link, thumb, created from time_covers";
+    if($start_date && $stop_date) {
+      $sql .= " where created between '" . $start_date . "'  and '" . $stop_date . "'";
+    }
+    $sql .= " order by created desc";
+
+    $results = $app['db']->query($sql);
+
+    $covers = array();
+
+    while ($cover = $results->fetch(PDO::FETCH_NAMED)) {
+      $covers[] = $cover;
+    }
+
+    return $app->json($covers);
+})
+->value('start_date', 'NULL')
+->value('stop_date', 'NULL');;
 
 $app->run();
