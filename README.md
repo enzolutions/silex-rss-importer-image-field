@@ -17,7 +17,9 @@ The command above will download silex mini-framework and RSS Client library.
 
 For information about how to install composer go to <a href="https://github.com/composer/composer">https://github.com/composer/composer</a>
 
-## Dependencies <small>All installed by composer</small>
+## Dependencies
+
+<small>All installed by Composer</small>
 
 <ul>
   <li>Silex (<a href="http://silex.sensiolabs.org">http://silex.sensiolabs.org</a>)</li>
