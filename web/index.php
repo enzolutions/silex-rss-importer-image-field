@@ -111,7 +111,7 @@ $app->get('/rest/covers/{start_date}/{stop_date}', function ($start_date, $stop_
 
     return $app->json($covers);
 })
-->value('start_date', 'NULL')
-->value('stop_date', 'NULL');;
+->value('start_date', NULL)
+->value('stop_date', NULL);;
 
 $app->run();
