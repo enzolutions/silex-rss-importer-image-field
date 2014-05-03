@@ -50,5 +50,5 @@ For quick test you can go to web folder and run php -S localhost:8000, after tha
 RSS Import : Access URL http://localhost:8000/rss/import
 REST JSON GET:
 
-  All Items : http://localhost:8000/rest/covers
+  All Items : http://localhost:8000/rest/covers <br/>
   Filters: http://localhost:8000/rest/covers/2014-04-01/2014-04-25
