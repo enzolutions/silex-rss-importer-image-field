@@ -1,0 +1,7 @@
+database:
+    driver: pdo_mysql
+    host: localhost
+    dbname: time_closeup
+    user: root
+    password: root
+    charset: utf8
