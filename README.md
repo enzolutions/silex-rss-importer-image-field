@@ -39,7 +39,7 @@ For information about how to install composer go to <a href="https://github.com/
 <ol>
   <li>Created a DB and put credentials in config/settings.yml</li>
   <li>Configure your webservices to point to web folder as document root</li>
-<ol>
+</ol>
 
 For quick test you can go to web folder and run php -S localhost:8000, after that just write localhost:8000 in your browser.
 
