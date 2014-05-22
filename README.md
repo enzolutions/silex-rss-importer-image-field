@@ -1,7 +1,7 @@
-time-closeup-silex
+Sielx RSS Importer  Imagen Field
 ==================
 
-Custom RSS Reader + REST Services build with Silex micro-framework
+Custom RSS Reader enabled import custom image field + REST Services build with Silex micro-framework
 
 ## Install
 
@@ -68,3 +68,15 @@ REST JSON GET:
 
   All Items : http://localhost:8000/rest/covers <br/>
   Filters: http://localhost:8000/rest/covers/2014-04-01/2014-04-25
+
+#### Enable CORS
+
+If you are planning use this REST server as source of data for other domains you must to enable the requestor or open for any requestor. The function to acomplish that feature is at the end of web/index.php
+
+````
+// Enable CORS
+$app->after(function (Request $request, Response $response) {
+    //$response->headers->set('Access-Control-Allow-Origin', '*');
+    $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:8081');
+});
+````
