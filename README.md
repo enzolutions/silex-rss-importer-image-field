@@ -34,7 +34,13 @@ For information about how to install composer go to <a href="https://github.com/
   <li>RSS Importer with Image support</li>
   <li>DB storage for imported items</li>
   <li>REST GET Method to fetch items in JSON format with optional date filters</li>
+  <li>Implemented a custom RSS Processor to enable custom imagen field</a>
+  <li>Implementd a custom RSS Parses to enable custom image field (not enabled)</li>
 </ul>
+
+## Demo
+
+If you want try the output of this REST Server you can test by yourself at <a target="http://silex.7sabores.com/timeline/rest/covers">http://silex.7sabores.com/timeline/rest/covers</a>.
 
 ## Install
 
