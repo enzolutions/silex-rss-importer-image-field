@@ -1,7 +1,12 @@
-Sielx RSS Importer  Imagen Field
+Silex RSS Importer  Imagen Field
 ==================
 
 Custom RSS Reader enabled import custom image field + REST Services build with Silex micro-framework
+
+## Demo
+
+If you want to try the output of this REST Server, you can test by yourself at <a target="_blank" href="http://silex.7sabores.com/timeline/rest/covers">http://silex.7sabores.com/timeline/rest/covers</a>.
+
 
 ## Install
 
@@ -37,10 +42,6 @@ For information about how to install composer go to <a href="https://github.com/
   <li>Implemented a custom RSS Processor to enable custom imagen field</a>
   <li>Implementd a custom RSS Parses to enable custom image field (not enabled)</li>
 </ul>
-
-## Demo
-
-If you want try the output of this REST Server you can test by yourself at <a target="http://silex.7sabores.com/timeline/rest/covers">http://silex.7sabores.com/timeline/rest/covers</a>.
 
 ## Install
 
