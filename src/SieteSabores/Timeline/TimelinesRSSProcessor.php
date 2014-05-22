@@ -25,7 +25,7 @@ class TimelinesRSSProcessor extends AbstractNodeFactory implements ProcessorInte
      */
     protected function getNode()
     {
-        return new RSS20Custom();
+        return new RSS20();
     }
 
     /**

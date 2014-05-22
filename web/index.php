@@ -2,6 +2,10 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+// Request Libraries
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 // Parser libreries
 use Desarrolla2\RSSClient\RSSClient;
 use SieteSabores\Timeline\TimelinesRSSProcessor;
@@ -13,7 +17,12 @@ use Doctrine\DBAL\Schema\Table;
 $app = new Silex\Application();
 
 // Load App YML configuration
-$app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__.'/../config/settings.yml'));
+$app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../config/settings.yml'));
+
+// Register Monolog Service
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => __DIR__ . '/../logs/development.log',
+));
 
 // Set DB Connection
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
@@ -34,6 +43,8 @@ if (!$schema->tablesExist('time_covers')) {
 
   $schema->createTable($time_covers);
 }
+
+$app['monolog']->addDebug('Before define Routes.');
 
 $app->get('/rss/import', function() use ($app) {
   $client = new RSSClient();
@@ -112,6 +123,12 @@ $app->get('/rest/covers/{start_date}/{stop_date}', function ($start_date, $stop_
     return $app->json($covers);
 })
 ->value('start_date', NULL)
-->value('stop_date', NULL);;
+->value('stop_date', NULL);
+
+// Enable CORS
+$app->after(function (Request $request, Response $response) {
+    //$response->headers->set('Access-Control-Allow-Origin', '*');
+    $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:8081');
+});
 
 $app->run();
